@@ -46,21 +46,32 @@ def login(username, password):
         return response
 
 
-login_response = None
-print("1. Register")
-print("2. Login")
-choice = input("Enter your choice (1/2/3): ")
-if choice == "1":
-    username = input("Enter username: ")
-    password = input("Enter password: ")
-    login_response = register(username, password)
-elif choice == "2":
-    username = input("Enter username: ")
-    password = input("Enter password: ")
-    login_response = login(username, password)
+login_response = ""
 
-if login_response == "Successfully logged in" or "Registered successfully":
-    # Create a socket object
+while True:
+    print("1. Register")
+    print("2. Login")
+    choice = input("Enter your choice (1/2/3): ")
+    if choice == "1":
+        username = input("Enter username: ")
+        password = input("Enter password: ")
+        login_response = register(username, password)
+        if '{"response": "Registered successfully"}' in login_response:
+            print("Registered successfully")
+            break  # Exit the loop if successfully registered
+    elif choice == "2":
+        username = input("Enter username: ")
+        password = input("Enter password: ")
+        login_response = login(username, password)
+        print(login_response + "AAAAAAAAAAAAAAAAAAAs")
+        if '{"response": "Successfully logged in"}' in login_response:
+            print("Successfully logged in")
+            break  # Exit the loop if successfully logged in
+
+if (
+    '{"response": "Successfully logged in"}' in login_response
+    or '{"response": "Registered successfully"}' in login_response
+):  # Create a socket object
     s = socket.socket()
 
     # Connect to the server
