@@ -117,9 +117,15 @@ if (
     print("Derived Key (client):", derived_key.hex())
 
     # Encrypt the message using AES
-    message = b"Hello from client!"
+    message_initial = "Hello from client!"
+    message = message_initial.encode("ascii")
+    sha256_hashed = Hashing.sha256_hash(message)
+    concatinated_msg = message_initial + " " + sha256_hashed
+    binary_concatinated_msg = concatinated_msg.encode("ascii")
     aes_encryptor = AESEncryptor(derived_key)
-    aes_encrypted = aes_encryptor.encrypt(message)
+    aes_encrypted = aes_encryptor.encrypt(binary_concatinated_msg)
+
+    print("sha256_hashed", sha256_hashed)
     print("aes_encrypted tuple ", aes_encrypted)
     # Convert bytes to hexadecimal strings
     # aes_encrypted_hex = [part.hex() for part in aes_encrypted]
