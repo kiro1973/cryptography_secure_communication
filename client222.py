@@ -63,7 +63,6 @@ while True:
         username = input("Enter username: ")
         password = input("Enter password: ")
         login_response = login(username, password)
-        print(login_response + "AAAAAAAAAAAAAAAAAAAs")
         if '{"response": "Successfully logged in"}' in login_response:
             print("Successfully logged in")
             break  # Exit the loop if successfully logged in
