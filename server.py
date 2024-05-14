@@ -58,7 +58,6 @@ def handle_client(conn, addr):
                 conn.send(json.dumps({"response": "Successfully logged in"}).encode())
             else:
                 conn.send(json.dumps({"response": "Login failed"}).encode())
-                conn.close()
 
     conn.close()
 
